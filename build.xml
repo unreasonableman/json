@@ -1,0 +1,24 @@
+<project name="json" default="package">
+	<property name="src" location="src"/>
+	<property name="build" location="build"/>
+	<property name="dist" location="dist"/>
+
+	<target name="compile">
+		<mkdir dir="${build}"/>
+		<javac srcdir="${src}" debug="on" destdir="${build}"/>
+	</target>
+
+	<target name="package" depends="compile">
+		<mkdir dir="${dist}"/>
+		<jar destfile="${dist}/json.jar" basedir="." includes="${build}/**">
+			<fileset dir="build"/>
+		</jar>
+		<copy file="${dist}/json.jar" tofile="../../jars/json.jar"/>
+	</target>
+
+	<target name="clean">
+		<delete failonerror="false" dir="${build}"/>
+		<delete failonerror="false" dir="${dist}"/>
+		<delete failonerror="false" file="log.txt"/>
+	</target>
+</project>
